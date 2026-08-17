@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "boundary_chunk",
+  "executor_program": "../fixed_boundary_chunk.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

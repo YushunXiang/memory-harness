@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "none",
+  "executor_program": "../fixed_none.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

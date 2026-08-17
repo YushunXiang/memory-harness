@@ -1,0 +1,19 @@
+{
+  "schema_version": "memory_harness.task/v1",
+  "task_name": "cover_blocks",
+  "task_config": "demo_clean",
+  "tmc": "M(n)",
+  "source_dir": "../../../../RMBench/data/cover_blocks/demo_clean/data",
+  "repo_id": "local/rmbench_cover_blocks_oracle_success_50plus",
+  "asset_id": "rmbench_cover_blocks_oracle_50plus",
+  "prompt": "On the table, red, green, and blue blocks are arranged randomly along with three lids. From the current viewpoint, cover the blocks from left to right using the lids, and then uncover them again in the sequence red, green, and blue.",
+  "max_steps": 1500,
+  "paired_layout_protocol": true,
+  "fps": 25,
+  "expected_episodes": 50,
+  "camera_map": {
+    "head_camera": "cam_high",
+    "left_camera": "cam_left_wrist",
+    "right_camera": "cam_right_wrist"
+  }
+}

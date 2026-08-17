@@ -1,0 +1,9 @@
+{
+  "name": "none",
+  "deployable": true,
+  "paths": [],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "none"
+  }
+}

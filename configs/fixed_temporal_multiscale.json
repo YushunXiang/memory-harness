@@ -1,0 +1,27 @@
+{
+  "name": "temporal_multiscale",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "temporal_multiscale",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "always"},
+      "store": {"type": "ring", "options": {"capacity": 500}},
+      "retriever": {
+        "type": "temporal_multiscale",
+        "options": {"max_items": 30, "exponential_items": 15}
+      },
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"temporal_multiscale": 30}
+    }
+  }
+}

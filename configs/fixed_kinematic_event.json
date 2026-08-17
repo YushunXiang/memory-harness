@@ -1,0 +1,40 @@
+{
+  "name": "kinematic_event",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "anchor",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "first"},
+      "store": {"type": "anchor"},
+      "retriever": {"type": "all"},
+      "lifecycle": {"type": "episode"}
+    },
+    {
+      "name": "event",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {
+        "type": "causal_kinematic_peak",
+        "options": {
+          "motion_window": 30,
+          "peak_lookback": 20,
+          "confirmation_delay": 20,
+          "refractory_steps": 8
+        }
+      },
+      "store": {"type": "ring", "options": {"capacity": 30}},
+      "retriever": {"type": "latest", "options": {"max_items": 30}},
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": "anchor",
+      "history_path_quotas": {"event": 30}
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "consolidating",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "consolidating",
+      "encoder": {
+        "type": "tokens",
+        "options": {"max_tokens": 1}
+      },
+      "writer": {"type": "always"},
+      "store": {
+        "type": "adjacent_merge",
+        "options": {"capacity": 30}
+      },
+      "retriever": {
+        "type": "latest",
+        "options": {"max_items": 30}
+      },
+      "lifecycle": {"type": "phase"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"consolidating": 30}
+    }
+  }
+}

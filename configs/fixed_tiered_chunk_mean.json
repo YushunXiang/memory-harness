@@ -1,0 +1,34 @@
+{
+  "name": "tiered_chunk_mean",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "tiered_chunk_mean",
+      "encoder": {
+        "type": "tokens",
+        "options": {"max_tokens": 1}
+      },
+      "writer": {"type": "always"},
+      "store": {
+        "type": "tiered_chunk_mean",
+        "options": {
+          "short_capacity": 6,
+          "migration_chunk_size": 3,
+          "long_capacity": 8
+        }
+      },
+      "retriever": {"type": "all"},
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"tiered_chunk_mean": 30}
+    }
+  }
+}

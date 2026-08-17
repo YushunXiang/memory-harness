@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "tiered_chunk_mean",
+  "executor_program": "../fixed_tiered_chunk_mean.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

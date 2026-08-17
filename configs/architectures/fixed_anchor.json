@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "anchor",
+  "executor_program": "../fixed_anchor.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

@@ -1,0 +1,65 @@
+{
+  "candidates": [
+    {
+      "exact_sliding_query_fraction": 0.003436157750878563,
+      "mean_outside_latest_window_fraction": 0.6643498633346349,
+      "median_chunk_count": 2.0,
+      "median_selected_chunk_length": 107.0,
+      "threshold": 0.9993,
+      "underfilled_query_fraction": 0.0
+    },
+    {
+      "exact_sliding_query_fraction": 0.0040609137055837565,
+      "mean_outside_latest_window_fraction": 0.6531823506442795,
+      "median_chunk_count": 3.0,
+      "median_selected_chunk_length": 101.0,
+      "threshold": 0.99935,
+      "underfilled_query_fraction": 0.0
+    },
+    {
+      "exact_sliding_query_fraction": 0.005076142131979695,
+      "mean_outside_latest_window_fraction": 0.6387010282441754,
+      "median_chunk_count": 3.0,
+      "median_selected_chunk_length": 92.0,
+      "threshold": 0.9994,
+      "underfilled_query_fraction": 0.0
+    },
+    {
+      "exact_sliding_query_fraction": 0.007184693479109723,
+      "mean_outside_latest_window_fraction": 0.6191331511128465,
+      "median_chunk_count": 3.0,
+      "median_selected_chunk_length": 84.0,
+      "threshold": 0.9995,
+      "underfilled_query_fraction": 0.0
+    },
+    {
+      "exact_sliding_query_fraction": 0.009761811792268645,
+      "mean_outside_latest_window_fraction": 0.607398151763634,
+      "median_chunk_count": 4.0,
+      "median_selected_chunk_length": 68.0,
+      "threshold": 0.9996,
+      "underfilled_query_fraction": 0.0
+    },
+    {
+      "exact_sliding_query_fraction": 0.014057008980866849,
+      "mean_outside_latest_window_fraction": 0.6289157881036054,
+      "median_chunk_count": 8.0,
+      "median_selected_chunk_length": 52.0,
+      "threshold": 0.9997,
+      "underfilled_query_fraction": 0.0
+    }
+  ],
+  "inputs": {
+    "context_bank": "/inspire/qb-ilm/project/robot-reasoning/czxs253130583/yushun/RAG_exploration/rmbench_runs/emac_put_back_block_v1/anchor_sliding_context_bank.npz",
+    "context_manifest": "/inspire/qb-ilm/project/robot-reasoning/czxs253130583/yushun/RAG_exploration/rmbench_runs/emac_put_back_block_v1/anchor_sliding_context_manifest.json",
+    "template_manifest": "/inspire/qb-ilm/project/robot-reasoning/czxs253130583/yushun/RAG_exploration/rmbench_runs/emac_put_back_block_v1/task_template.json"
+  },
+  "max_items": 30,
+  "min_chunk_items": 30,
+  "schema_version": "memory_harness.boundary_chunk_calibration/v1",
+  "selected_threshold": 0.99935,
+  "selection_rule": "smallest tested threshold with median chunk count at least 3 and zero underfilled full-history queries",
+  "selection_split": "train",
+  "selection_uses_rollout_outcomes": false,
+  "target_median_chunk_count": 3
+}

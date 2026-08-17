@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "anchor_sliding",
+  "executor_program": "../fixed_anchor_sliding.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

@@ -1,0 +1,31 @@
+{
+  "name": "boundary_chunk",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "boundary_chunk",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "always"},
+      "store": {"type": "ring", "options": {"capacity": 500}},
+      "retriever": {
+        "type": "boundary_chunk",
+        "options": {
+          "max_items": 30,
+          "boundary_similarity_threshold": 0.99935,
+          "min_chunk_items": 30
+        }
+      },
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"boundary_chunk": 30}
+    }
+  }
+}

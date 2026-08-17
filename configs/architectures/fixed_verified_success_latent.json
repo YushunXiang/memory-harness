@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "verified_success_latent",
+  "executor_program": "../fixed_verified_success_latent.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "sliding",
+  "executor_program": "../fixed_sliding.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

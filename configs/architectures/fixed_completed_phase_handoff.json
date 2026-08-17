@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "completed_phase_handoff",
+  "executor_program": "../fixed_completed_phase_handoff.json",
+  "planner": "mem0",
+  "planner_memory": "none",
+  "planner_model": "mem0-cover-blocks-no-key-planner"
+}

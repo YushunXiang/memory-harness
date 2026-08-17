@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "key_anchor_sliding",
+  "executor_program": "../fixed_anchor_sliding.json",
+  "planner": "mem0",
+  "planner_memory": "key",
+  "planner_model": "mem0-cover-blocks-key-planner"
+}

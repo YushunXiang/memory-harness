@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "split": "development",
+  "locked_test": false,
+  "task": "cover_blocks",
+  "task_config": "demo_clean",
+  "paired_layout_protocol": true,
+  "simulator_seeds": [
+    100000,
+    100001,
+    100002,
+    100003,
+    100004,
+    100005,
+    100006,
+    100007,
+    100008,
+    100009
+  ],
+  "policy_seed_base": 120000,
+  "source_manifest": "../../configs/rmbench_cover_blocks_seeds.json",
+  "source_manifest_file_sha256": "70a6f683a119226b026dde2a6caaa7186c26b04dbcf5c3081ea2d9d02f12fc43",
+  "source_manifest_embedded_sha256": "e916aee5e6836dfb1aec66c62251268014eaef6f5e26830c7602af95630060a6",
+  "frozen_at_utc": "2026-08-14T00:00:00Z",
+  "notes": [
+    "These seeds have already been used in development runs and must never be presented as a fresh locked test.",
+    "A future locked test split must use disjoint seeds and remain inaccessible to the research agent."
+  ]
+}

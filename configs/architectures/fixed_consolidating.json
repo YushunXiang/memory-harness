@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "consolidating",
+  "executor_program": "../fixed_consolidating.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

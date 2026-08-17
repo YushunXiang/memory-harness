@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "semantic_recent_union",
+  "executor_program": "../fixed_semantic_recent_union.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

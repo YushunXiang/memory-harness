@@ -1,0 +1,35 @@
+{
+  "name": "recent_global",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "recent",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "always"},
+      "store": {"type": "ring", "options": {"capacity": 15}},
+      "retriever": {"type": "latest", "options": {"max_items": 15}},
+      "lifecycle": {"type": "episode"}
+    },
+    {
+      "name": "global",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "always"},
+      "store": {"type": "ring", "options": {"capacity": 500}},
+      "retriever": {
+        "type": "uniform_global",
+        "options": {"max_items": 15, "exclude_recent_items": 15}
+      },
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"recent": 15, "global": 15}
+    }
+  }
+}

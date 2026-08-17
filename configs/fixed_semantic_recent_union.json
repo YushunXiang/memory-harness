@@ -1,0 +1,27 @@
+{
+  "name": "semantic_recent_union",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "semantic_recent_union",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "always"},
+      "store": {"type": "ring", "options": {"capacity": 500}},
+      "retriever": {
+        "type": "semantic_recent_union",
+        "options": {"semantic_items": 20, "recent_items": 10}
+      },
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"semantic_recent_union": 30}
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "uniform_global",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "uniform_global",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "always"},
+      "store": {"type": "ring", "options": {"capacity": 500}},
+      "retriever": {"type": "uniform_global", "options": {"max_items": 30}},
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"uniform_global": 30}
+    }
+  }
+}

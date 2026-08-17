@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "recent_global",
+  "executor_program": "../fixed_recent_global.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

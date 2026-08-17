@@ -1,0 +1,21 @@
+{
+  "schema_version": "memory_harness.fixed_screen/v1",
+  "name": "suitev9_screen3",
+  "task": "put_back_block",
+  "num_episodes": 3,
+  "seed": 100050,
+  "policy_seed_base": 120050,
+  "evidence_kind": "zero_shot",
+  "comparisons": [
+    {"reference": "sliding", "candidate": "novelty_sliding"},
+    {"reference": "sliding", "candidate": "dhem_event"},
+    {"reference": "anchor_sliding", "candidate": "kinematic_event"},
+    {"reference": "sliding", "candidate": "content_recency"},
+    {"reference": "sliding", "candidate": "semantic_recent_union"},
+    {"reference": "sliding", "candidate": "uniform_global"},
+    {"reference": "sliding", "candidate": "recent_global"},
+    {"reference": "sliding", "candidate": "temporal_multiscale"},
+    {"reference": "sliding", "candidate": "boundary_chunk"},
+    {"reference": "sliding", "candidate": "tiered_chunk_mean"}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "memory_harness.task/v1",
+  "task_name": "put_back_block",
+  "task_config": "demo_clean",
+  "tmc": "M(1)",
+  "source_dir": "../../../../RMBench/data/put_back_block/demo_clean/data",
+  "repo_id": "local/rmbench_put_back_block_demo_clean",
+  "asset_id": "rmbench_put_back_block_demo_clean",
+  "prompt": "There are four mats, one block, and a button on the table. One block is on one of the mats. First, put the block in the center, then press the button. Then, put the block back in its original position.",
+  "max_steps": 500,
+  "paired_layout_protocol": false,
+  "fps": 30,
+  "expected_episodes": 50,
+  "camera_map": {
+    "head_camera": "cam_high",
+    "left_camera": "cam_left_wrist",
+    "right_camera": "cam_right_wrist"
+  }
+}

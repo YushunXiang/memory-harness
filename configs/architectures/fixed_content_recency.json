@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "content_recency",
+  "executor_program": "../fixed_content_recency.json",
+  "planner": "none",
+  "planner_memory": "none",
+  "planner_model": null
+}

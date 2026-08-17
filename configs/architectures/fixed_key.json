@@ -1,0 +1,8 @@
+{
+  "schema_version": 3,
+  "name": "key",
+  "executor_program": "../fixed_none.json",
+  "planner": "mem0",
+  "planner_memory": "key",
+  "planner_model": "mem0-cover-blocks-key-planner"
+}

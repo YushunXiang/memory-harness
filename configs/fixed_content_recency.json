@@ -1,0 +1,27 @@
+{
+  "name": "content_recency",
+  "deployable": true,
+  "paths": [
+    {
+      "name": "content_recency",
+      "encoder": {"type": "tokens", "options": {"max_tokens": 1}},
+      "writer": {"type": "always"},
+      "store": {"type": "ring", "options": {"capacity": 500}},
+      "retriever": {
+        "type": "content_recency",
+        "options": {"max_items": 30, "recency_penalty": 0.00001}
+      },
+      "lifecycle": {"type": "episode"}
+    }
+  ],
+  "controller": {"type": "all"},
+  "utilizer": {
+    "type": "mem0_context",
+    "options": {
+      "embed_dim": 2048,
+      "sliding_window_size": 30,
+      "anchor_path": null,
+      "history_path_quotas": {"content_recency": 30}
+    }
+  }
+}
