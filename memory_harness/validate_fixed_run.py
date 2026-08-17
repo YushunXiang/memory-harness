@@ -12,6 +12,7 @@ from memory_harness.config import load_program_spec
 from memory_harness.config_snapshot import validate_config_snapshot
 from memory_harness.runtime_snapshot import validate_runtime_snapshot
 from memory_harness.tasks import load_task_spec
+from memory_harness.put_back_progress import load_episodes, summarize_put_back_subtasks
 
 
 def _sha256(path: pathlib.Path) -> str:
@@ -144,6 +145,26 @@ def validate(
         for path in executor_spec.paths
         if path.store.type == "verified_success_ring"
     )
+    subtask_evaluation = None
+    if task_spec.task_name == "put_back_block":
+        episodes_path = run_dir / "episodes.jsonl"
+        subtask_summary_path = run_dir / "subtask_summary.json"
+        if not subtask_summary_path.is_file():
+            raise ValueError("Put Back run is missing subtask_summary.json")
+        expected_subtasks = summarize_put_back_subtasks(load_episodes(episodes_path))
+        recorded_subtasks = json.loads(
+            subtask_summary_path.read_text(encoding="utf-8")
+        )
+        if recorded_subtasks != expected_subtasks:
+            raise ValueError("Put Back subtask summary disagrees with episode records")
+        if int(recorded_subtasks["num_episodes"]) != int(summary["num_episodes"]):
+            raise ValueError("Put Back subtask summary episode count disagrees with run summary")
+        subtask_evaluation = {
+            "summary": str(subtask_summary_path.resolve()),
+            "summary_sha256": _sha256(subtask_summary_path),
+            "subtask_metrics": recorded_subtasks["subtask_metrics"],
+            "stopped_at_counts": recorded_subtasks["stopped_at_counts"],
+        }
 
     expected = {
         "policy_router_manifest": None,
@@ -312,6 +333,7 @@ def validate(
         "simulator_seed_start": config["seed"],
         "policy_seed_base": config["policy_seed_base"],
         "num_episodes": summary["num_episodes"],
+        "subtask_evaluation": subtask_evaluation,
         "resource_usage": {
             "write_count": sum(row.get("event") == "WRITE" for row in events),
             "write_decision_count": sum(

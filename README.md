@@ -31,7 +31,7 @@ encoder → writer → store → retriever → lifecycle → utilizer
 | 21 个候选架构的 build、smoke 和 checkpoint shape preflight | 已完成 |
 | Mem-0 anchor/sliding 推理干预复现 | 已完成：完整 memory `10/10`，去 anchor `2/10`，去 sliding `0/10` |
 | Mem-0 planner key/no-key 配对诊断 | 已完成：key `2/10`，no-key `0/10` |
-| π0.5 Put Back u1200 executor readiness | 未通过：三种条件均为 `0/3` 完整成功 |
+| π0.5 Put Back u1200 executor readiness | 未通过：完整任务均为 `0/3`；第 1 个 subtask 完成率为 full-memory `0/3`、empty-mask `1/3`、native-none `2/3`，均未完成第 2 个 subtask |
 | u3000 延长训练与 progress-aware 复评 | 待恢复并完成 |
 | 固定 memory Gate-20 | 待 executor readiness 通过后执行 |
 | 候选 matched retraining、controller 和 50-episode confirmation | 待完成 |

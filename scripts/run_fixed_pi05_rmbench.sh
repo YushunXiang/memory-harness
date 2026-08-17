@@ -138,6 +138,13 @@ fi
 
 bash "$PROJECT_ROOT/run_rmbench_baseline_local.sh"
 
+if [[ "$TASK_NAME" == put_back_block ]]; then
+  PYTHONPATH="$HARNESS_ROOT:$OUT_DIR/runtime:$PROJECT_ROOT:${PYTHONPATH:-}" \
+    "$PYTHON" -m memory_harness.put_back_progress \
+    --episodes "$OUT_DIR/episodes.jsonl" \
+    --output "$OUT_DIR/subtask_summary.json"
+fi
+
 validate_args=(
   -m memory_harness.validate_fixed_run
   --run-dir "$OUT_DIR"

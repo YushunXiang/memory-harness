@@ -7,6 +7,8 @@ from collections.abc import Sequence
 from statistics import mean
 from typing import Any
 
+from memory_harness.put_back_progress import summarize_put_back_subtasks
+
 
 SCHEMA_VERSION = "memory_harness.executor_run_signal/v2"
 
@@ -64,6 +66,9 @@ def assess_run_signal(run_dir: pathlib.Path) -> dict[str, Any]:
                 raise ValueError("episode has invalid task_progress")
             task_progress_scores.append(float(task_progress["max_progress_score"]))
     max_task_progress = max(task_progress_scores) if task_progress_scores else None
+    subtask_evaluation = (
+        summarize_put_back_subtasks(episodes) if task_progress_scores else None
+    )
     signal = (
         successes > 0
         or max(max_rewards) > 0.0
@@ -92,6 +97,7 @@ def assess_run_signal(run_dir: pathlib.Path) -> dict[str, Any]:
         "max_observed_reward": max(max_rewards),
         "mean_total_reward": mean(total_rewards),
         "max_observed_task_progress": max_task_progress,
+        "subtask_evaluation": subtask_evaluation,
         "observable_executor_signal": signal,
         "decision": {
             "next_action": next_action,

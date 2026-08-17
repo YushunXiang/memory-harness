@@ -8,8 +8,10 @@ from collections import Counter
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from memory_harness.put_back_progress import summarize_put_back_subtasks
 
-SCHEMA_VERSION = "memory_harness.put_back_action_replay_summary/v1"
+
+SCHEMA_VERSION = "memory_harness.put_back_action_replay_summary/v2"
 REPLAY_SCHEMA = "memory_harness.put_back_action_replay/v1"
 REQUIRED_LABELS = ("full_memory", "empty_mask", "native_none")
 
@@ -77,6 +79,9 @@ def summarize_replays(paths: Mapping[str, pathlib.Path]) -> dict[str, Any]:
             "mean_progress_score": sum(scores[label]) / len(scores[label]),
             "max_progress_score": max(scores[label]),
             "score_counts": {str(score): counts[score] for score in range(4)},
+            "subtask_evaluation": summarize_put_back_subtasks(
+                rows[label], success_key="replay_success"
+            ),
             "replay_artifact": str(paths[label].resolve()),
             "replay_artifact_sha256": hashlib.sha256(paths[label].read_bytes()).hexdigest(),
         }

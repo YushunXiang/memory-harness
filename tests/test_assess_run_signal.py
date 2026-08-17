@@ -76,6 +76,13 @@ def test_sparse_reward_task_progress_is_an_executor_signal(tmp_path: Path) -> No
     )
 
     assert result["max_observed_task_progress"] == 1.0
+    assert result["subtask_evaluation"]["subtask_metrics"][0][
+        "completion_rate"
+    ] == 0.5
+    assert [
+        row["stopped_at_subtask"]
+        for row in result["subtask_evaluation"]["episode_outcomes"]
+    ] == ["move_block_to_center", "press_button"]
     assert result["observable_executor_signal"] is True
     assert result["decision"]["next_action"] == "budget_match_controls_before_comparison"
 

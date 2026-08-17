@@ -28,6 +28,8 @@ def test_rollout_runners_enable_audited_task_trace() -> None:
     ):
         source = (ROOT / "scripts" / script_name).read_text(encoding="utf-8")
         assert "export TASK_STATE_TRACE_FREQUENCY=10" in source
+        assert "memory_harness.put_back_progress" in source
+        assert '"$OUT_DIR/subtask_summary.json"' in source
 
 
 def test_put_back_replay_queue_runs_before_cover_blocks() -> None:

@@ -19,7 +19,11 @@ def _replay(path: Path, scores: list[int], *, seed_offset: int = 0) -> Path:
                         "seed": 100000 + index + seed_offset,
                         "policy_seed": 120000 + index,
                         "num_actions": 500,
-                        "task_progress": {"max_progress_score": score},
+                        "replay_success": score == 3,
+                        "task_progress": {
+                            "task": "put_back_block",
+                            "max_progress_score": score,
+                        },
                     }
                     for index, score in enumerate(scores)
                 ],
@@ -48,6 +52,15 @@ def test_summarize_replays_reports_paired_progress_directions(tmp_path: Path) ->
         "2": 1,
         "3": 0,
     }
+    subtask_metrics = result["conditions"]["full_memory"]["subtask_evaluation"]
+    assert [row["completion_rate"] for row in subtask_metrics["subtask_metrics"]] == [
+        2 / 3,
+        1 / 3,
+        0.0,
+    ]
+    assert [
+        row["stopped_at_subtask"] for row in subtask_metrics["episode_outcomes"]
+    ] == ["return_block_to_origin", "press_button", "move_block_to_center"]
     assert result["paired_directions"]["empty_mask_to_full_memory"] == {
         "candidate_higher": 1,
         "equal": 2,

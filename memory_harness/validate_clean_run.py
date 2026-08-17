@@ -6,6 +6,7 @@ import json
 import pathlib
 
 from memory_harness import __version__
+from memory_harness.put_back_progress import load_episodes, summarize_put_back_subtasks
 from memory_harness.tasks import load_task_spec
 
 
@@ -56,6 +57,26 @@ def validate(
     program = json.loads(program_config.read_text(encoding="utf-8"))
     if program.get("name") != "none" or program.get("paths") != []:
         raise ValueError("clean baseline requires the fixed none program")
+    subtask_evaluation = None
+    if task_spec.task_name == "put_back_block":
+        episodes_path = run_dir / "episodes.jsonl"
+        subtask_summary_path = run_dir / "subtask_summary.json"
+        if not subtask_summary_path.is_file():
+            raise ValueError("Put Back run is missing subtask_summary.json")
+        expected_subtasks = summarize_put_back_subtasks(load_episodes(episodes_path))
+        recorded_subtasks = json.loads(
+            subtask_summary_path.read_text(encoding="utf-8")
+        )
+        if recorded_subtasks != expected_subtasks:
+            raise ValueError("Put Back subtask summary disagrees with episode records")
+        if int(recorded_subtasks["num_episodes"]) != int(summary["num_episodes"]):
+            raise ValueError("Put Back subtask summary episode count disagrees with run summary")
+        subtask_evaluation = {
+            "summary": str(subtask_summary_path.resolve()),
+            "summary_sha256": _sha256(subtask_summary_path),
+            "subtask_metrics": recorded_subtasks["subtask_metrics"],
+            "stopped_at_counts": recorded_subtasks["stopped_at_counts"],
+        }
     manifest = {
         "schema_version": 1,
         "harness_version": __version__,
@@ -82,6 +103,7 @@ def validate(
         "simulator_seed_start": config["seed"],
         "policy_seed_base": config["policy_seed_base"],
         "num_episodes": summary["num_episodes"],
+        "subtask_evaluation": subtask_evaluation,
         "disabled": [
             "policy_router",
             "episodic_memory",
